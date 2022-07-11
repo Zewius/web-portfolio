@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zewius</title>
+
+    <style>
+        details {
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            padding: .5em .5em 0;
+        }
+
+        summary {
+            font-weight: bold;
+            margin: -.5em -.5em 0;
+            padding: .5em;
+        }
+
+        details[open] {
+            padding: .5em;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #aaa;
+            margin-bottom: .5em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Приветствую тебя пользователь</h1>
+
+    <div th:if="${projects.isEmpty()}">
+        <h2>Список репозиториев пуст :(</h2>
+    </div>
+
+    <div th:unless="${projects.isEmpty()}">
+        <h2>Список репозиториев:</h2>
+
+        <div th:each="project: ${projects}">
+            <details>
+                <summary th:text="${project.name}">Название</summary>
+                <p th:text="${project.description}">Описание</p>
+                <br>
+                <a th:href="${project.link}">Ссылка</a>
+            </details>
+            <br>
+        </div>
+    </div>
+</body>
+
+</html>
